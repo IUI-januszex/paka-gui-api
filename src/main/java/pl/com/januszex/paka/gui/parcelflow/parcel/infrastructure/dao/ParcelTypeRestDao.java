@@ -23,30 +23,27 @@ class ParcelTypeRestDao implements ParcelTypeDao {
 
     @Override
     public Collection<ParcelTypeDto> getAll() {
-        URI uri = getBasePathBuilder().build().toUri();
-        return Arrays.asList(Objects.requireNonNull(restTemplate.getForObject(uri, ParcelTypeDto[].class)));
+        return Arrays.asList(Objects.requireNonNull(restTemplate.getForObject(getBaseUri(), ParcelTypeDto[].class)));
     }
 
     @Override
     public ParcelTypeDto add(ParcelTypeRequest request) {
-        URI uri = getBasePathBuilder().build().toUri();
-        return restTemplate.postForObject(uri, request, ParcelTypeDto.class);
+        return restTemplate.postForObject(getBaseUri(), request, ParcelTypeDto.class);
     }
 
     @Override
     public void update(long id, ParcelTypeRequest request) {
-        URI uri = getBasePathBuilder()
-                .path("/{id}")
-                .build(id);
-        restTemplate.put(uri, request);
+        restTemplate.put(getUriWithId(id), request);
     }
 
     @Override
     public ParcelTypeDto getById(long id) {
-        URI uri = getBasePathBuilder()
-                .path("/{id}")
-                .build(id);
-        return restTemplate.getForObject(uri, ParcelTypeDto.class);
+        return restTemplate.getForObject(getUriWithId(id), ParcelTypeDto.class);
+    }
+
+    @Override
+    public void deleteById(long id) {
+        restTemplate.delete(getUriWithId(id));
     }
 
     private UriComponentsBuilder getBasePathBuilder() {
@@ -55,8 +52,13 @@ class ParcelTypeRestDao implements ParcelTypeDao {
                 .path("/parcel-type");
     }
 
-    @Override
-    public void deleteById(long id) {
+    private URI getUriWithId(long id) {
+        return getBasePathBuilder()
+                .path("/{id}")
+                .build(id);
+    }
 
+    private URI getBaseUri() {
+        return getBasePathBuilder().build().toUri();
     }
 }

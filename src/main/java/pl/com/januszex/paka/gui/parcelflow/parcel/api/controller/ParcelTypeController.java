@@ -45,4 +45,10 @@ public class ParcelTypeController {
         return new ResponseEntity<>(parcelTypeDao.getById(id),
                 HttpStatus.OK);
     }
+
+    @DeleteMapping(path = {"/{id}"})
+    public ResponseEntity<Object> delete(@PathVariable long id) {
+        parcelTypeDao.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 }

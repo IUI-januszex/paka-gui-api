@@ -22,7 +22,7 @@ public class RestTemplateExceptionHandling extends DefaultResponseErrorHandler {
 
     @Override
     public void handleError(ClientHttpResponse response) throws IOException {
-        String message = "Unknown error, please contact with administrator";
+        String message;
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(response.getBody()))) {
             String stringResponse = reader.lines().collect(Collectors.joining());
             ErrorResponse errorResponse = objectMapper.readValue(stringResponse, ErrorResponse.class);
