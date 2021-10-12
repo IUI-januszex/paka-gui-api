@@ -1,1 +1,7 @@
-
+services:
+  rest:
+    urls:
+      pakaFlowApiUrl: 'http://localhost:8081/api'
+server:
+  servlet:
+    context-path: '/api'
