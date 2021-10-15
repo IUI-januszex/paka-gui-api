@@ -1,5 +1,7 @@
 package pl.com.januszex.paka.gui.parcelflow.parcel.api.dao;
 
+import pl.com.januszex.paka.gui.parcelflow.parcel.api.dto.ParcelTypeAssignedParcelCountDto;
+import pl.com.januszex.paka.gui.parcelflow.parcel.api.dto.ParcelTypeChangeActivatedRequest;
 import pl.com.januszex.paka.gui.parcelflow.parcel.api.dto.ParcelTypeDto;
 import pl.com.januszex.paka.gui.parcelflow.parcel.api.dto.ParcelTypeRequest;
 
@@ -15,4 +17,8 @@ public interface ParcelTypeDao {
     ParcelTypeDto getById(long id);
 
     void deleteById(long id);
+
+    void changeActiveState(long id, ParcelTypeChangeActivatedRequest request);
+
+    ParcelTypeAssignedParcelCountDto getAssignedParcelCount(long id);
 }

@@ -6,6 +6,8 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 import pl.com.januszex.paka.gui.configuration.rest.RestServiceUrls;
 import pl.com.januszex.paka.gui.parcelflow.parcel.api.dao.ParcelTypeDao;
+import pl.com.januszex.paka.gui.parcelflow.parcel.api.dto.ParcelTypeAssignedParcelCountDto;
+import pl.com.januszex.paka.gui.parcelflow.parcel.api.dto.ParcelTypeChangeActivatedRequest;
 import pl.com.januszex.paka.gui.parcelflow.parcel.api.dto.ParcelTypeDto;
 import pl.com.januszex.paka.gui.parcelflow.parcel.api.dto.ParcelTypeRequest;
 
@@ -46,6 +48,22 @@ class ParcelTypeRestDao implements ParcelTypeDao {
         restTemplate.delete(getUriWithId(id));
     }
 
+    @Override
+    public void changeActiveState(long id, ParcelTypeChangeActivatedRequest request) {
+        URI uri = getPathBuilderWithId()
+                .path("/state")
+                .build(id);
+        restTemplate.put(uri, request);
+    }
+
+    @Override
+    public ParcelTypeAssignedParcelCountDto getAssignedParcelCount(long id) {
+        URI uri = getPathBuilderWithId()
+                .path("/parcel-count")
+                .build(id);
+        return restTemplate.getForObject(uri, ParcelTypeAssignedParcelCountDto.class);
+    }
+
     private UriComponentsBuilder getBasePathBuilder() {
         return UriComponentsBuilder.newInstance()
                 .uri(URI.create(restServiceUrls.getPakaFlowApiUrl()))
@@ -53,9 +71,13 @@ class ParcelTypeRestDao implements ParcelTypeDao {
     }
 
     private URI getUriWithId(long id) {
-        return getBasePathBuilder()
-                .path("/{id}")
+        return getPathBuilderWithId()
                 .build(id);
+    }
+
+    private UriComponentsBuilder getPathBuilderWithId() {
+        return getBasePathBuilder()
+                .path("/{id}");
     }
 
     private URI getBaseUri() {

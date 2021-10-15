@@ -1,5 +1,6 @@
 package pl.com.januszex.paka.gui.parcelflow.parcel.api.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -10,4 +11,6 @@ public class ParcelTypeDto {
     private String name;
     private String description;
     private BigDecimal price;
+    @JsonProperty(value = "isActive")
+    private boolean active;
 }
