@@ -1,4 +1,4 @@
-package pl.com.januszex.paka.gui.parcelflow.parcel.api.dto;
+package pl.com.januszex.paka.gui.parcel.api.dto;
 
 import lombok.Data;
 

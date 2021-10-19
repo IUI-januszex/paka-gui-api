@@ -1,4 +1,4 @@
-package pl.com.januszex.paka.gui.parcelflow.parcel.api.controller;
+package pl.com.januszex.paka.gui.parcel.api.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -6,11 +6,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import pl.com.januszex.paka.gui.parcelflow.parcel.api.dao.ParcelTypeDao;
-import pl.com.januszex.paka.gui.parcelflow.parcel.api.dto.ParcelTypeAssignedParcelCountDto;
-import pl.com.januszex.paka.gui.parcelflow.parcel.api.dto.ParcelTypeChangeActivatedRequest;
-import pl.com.januszex.paka.gui.parcelflow.parcel.api.dto.ParcelTypeDto;
-import pl.com.januszex.paka.gui.parcelflow.parcel.api.dto.ParcelTypeRequest;
+import pl.com.januszex.paka.gui.parcel.api.dto.ParcelTypeAssignedParcelCountDto;
+import pl.com.januszex.paka.gui.parcel.api.dto.ParcelTypeChangeActivatedRequest;
+import pl.com.januszex.paka.gui.parcel.api.dto.ParcelTypeDto;
+import pl.com.januszex.paka.gui.parcel.api.dto.ParcelTypeRequest;
+import pl.com.januszex.paka.gui.parcel.api.dao.ParcelTypeDao;
 
 import javax.validation.Valid;
 import java.net.URI;
