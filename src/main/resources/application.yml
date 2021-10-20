@@ -1,7 +1,11 @@
 services:
   rest:
     urls:
-      pakaFlowApiUrl: 'http://localhost:8081/api'
+      pakaFlowApiUrl: 'https://localhost:8081/api'
 server:
   servlet:
     context-path: '/api'
+  ssl:
+    key-password: 'zaq12wsx'
+    key-store: 'src/main/resources/keystore.jks'
+    key-store-password: 'zaq12wsx'
