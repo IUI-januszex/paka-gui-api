@@ -11,28 +11,26 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.web.client.RestTemplate;
 import pl.com.januszex.paka.gui.configuration.rest.RestTemplateAuthInterceptor;
 import pl.com.januszex.paka.gui.configuration.rest.RestTemplateExceptionHandling;
+import pl.com.januszex.paka.gui.user.api.service.CurrentUserServicePort;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import javax.net.ssl.*;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
-
 @Configuration
 @EnableSwagger2
 @RequiredArgsConstructor
 public class BeanConfiguration {
 
-    public final RestTemplateBuilder restTemplateBuilder;
+    private final RestTemplateBuilder restTemplateBuilder;
+    private final CurrentUserServicePort currentUserService;
 
     @Bean
     public RestTemplate restTemplate() {
         return restTemplateBuilder
                 .errorHandler(new RestTemplateExceptionHandling())
-                .interceptors(new RestTemplateAuthInterceptor())
+                .interceptors(new RestTemplateAuthInterceptor(currentUserService))
                 .build();
     }
 
