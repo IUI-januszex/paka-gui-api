@@ -8,6 +8,7 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 import pl.com.januszex.paka.gui.configuration.rest.RestTemplateAuthInterceptor;
 import pl.com.januszex.paka.gui.configuration.rest.RestTemplateExceptionHandling;
@@ -29,6 +30,7 @@ public class BeanConfiguration {
     @Bean
     public RestTemplate restTemplate() {
         return restTemplateBuilder
+                .requestFactory(HttpComponentsClientHttpRequestFactory::new)
                 .errorHandler(new RestTemplateExceptionHandling())
                 .interceptors(new RestTemplateAuthInterceptor(currentUserService))
                 .build();

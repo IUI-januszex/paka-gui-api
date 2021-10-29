@@ -9,4 +9,5 @@ import org.springframework.context.annotation.Configuration;
 @Data
 public class RestServiceUrls {
     private String pakaFlowApiUrl;
+    private String pakaUsersApiUrl;
 }
