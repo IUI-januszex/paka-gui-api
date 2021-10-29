@@ -12,7 +12,8 @@ import java.util.Objects;
 public class CurrentUserServiceAdapter implements CurrentUserServicePort {
 
     public boolean isAnonymous() {
-        return SecurityContextHolder.getContext().getAuthentication() == null;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication == null || authentication.getPrincipal().equals("anonymousUser");
     }
 
     public String getCurrentJwt() {

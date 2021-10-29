@@ -1,11 +1,12 @@
 services:
   rest:
     urls:
-      pakaFlowApiUrl: 'https://localhost:8081/api'
+      pakaFlowApiUrl: 'http://localhost:8081/api'
+      pakaUsersApiUrl: 'http://localhost:5000/api'
   security:
     jwtSecret: 'rRYaQlIsv4TiaBuqVlCurRYaQlIsv4TiaBuqVlCu'
-    audience: 'test'
-    issuer: 'test'
+    audience: 'Test'
+    issuer: 'Test'
 server:
   servlet:
     context-path: '/api'
