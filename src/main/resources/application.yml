@@ -2,6 +2,10 @@ services:
   rest:
     urls:
       pakaFlowApiUrl: 'https://localhost:8081/api'
+  security:
+    jwtSecret: 'rRYaQlIsv4TiaBuqVlCurRYaQlIsv4TiaBuqVlCu'
+    audience: 'test'
+    issuer: 'test'
 server:
   servlet:
     context-path: '/api'
