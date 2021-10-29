@@ -30,7 +30,7 @@ public class JwtService {
                 .getBody();
         return UserData
                 .builder()
-                .id(claims.get("id", Integer.class))
+                .id(claims.get("id", String.class))
                 .username(claims.get("login", String.class))
                 .role(claims.get("role", String.class))
                 .build();

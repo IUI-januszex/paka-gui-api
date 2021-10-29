@@ -20,7 +20,7 @@ public class CurrentUserServiceAdapter implements CurrentUserServicePort {
     }
 
     @Override
-    public Long getId() {
+    public String getId() {
         return Objects.requireNonNull(getAuthentication()).getPrincipal();
     }
 

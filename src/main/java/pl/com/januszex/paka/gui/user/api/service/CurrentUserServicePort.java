@@ -5,7 +5,7 @@ public interface CurrentUserServicePort {
 
     String getCurrentJwt();
 
-    Long getId();
+    String getId();
 
     String getUserName();
 }

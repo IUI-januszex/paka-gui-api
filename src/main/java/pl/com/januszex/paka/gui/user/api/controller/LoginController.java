@@ -20,7 +20,7 @@ public class LoginController {
 
     @PostMapping("/login")
     public ResponseEntity<Object> login(HttpServletResponse response) {
-        Cookie cookie = getCookie(jwtService.getJwt(), -1);
+        Cookie cookie = getCookie("", -1);
         response.addCookie(cookie);
         return ResponseEntity.noContent().build();
     }

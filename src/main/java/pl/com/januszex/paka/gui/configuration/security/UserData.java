@@ -10,7 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 public class UserData {
-    long id;
+    String id;
     String username;
     String role;
 

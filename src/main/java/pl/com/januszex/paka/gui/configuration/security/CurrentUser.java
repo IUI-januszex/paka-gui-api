@@ -12,7 +12,7 @@ public class CurrentUser implements Authentication {
     private final String token;
     private final String username;
     private final Collection<GrantedAuthority> grantedAuthorities;
-    private final long id;
+    private final String id;
     private final Object details;
 
     public CurrentUser(String token, UserData userData, Object details) {
@@ -41,7 +41,7 @@ public class CurrentUser implements Authentication {
 
 
     @Override
-    public Long getPrincipal() {
+    public String getPrincipal() {
         return id;
     }
 
