@@ -66,6 +66,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/news/get/**",
                         "/user/login",
                         "/user/logout",
+                        "/user/register/**",
                         "GET", "POST", "PUT", "PATCH")
                 .permitAll()
                 .antMatchers("/**")
