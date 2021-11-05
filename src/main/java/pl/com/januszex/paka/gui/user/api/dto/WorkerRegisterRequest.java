@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @Data
 public class WorkerRegisterRequest extends UserRequest {
     private BigDecimal salary;
-    private long warehouse;
+    private long warehouseId;
     private String name;
     private String surname;
 }
