@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pl.com.januszex.paka.gui.user.api.dao.UserRegisterDao;
-import pl.com.januszex.paka.gui.user.api.dto.ClientRegisterRequest;
+import pl.com.januszex.paka.gui.user.api.dto.*;
+import pl.com.januszex.paka.gui.user.domain.WorkerType;
 
 import java.net.URI;
 
@@ -18,11 +19,35 @@ import java.net.URI;
 public class UserController {
     private final UserRegisterDao userRegisterDao;
 
-    @PostMapping
-    public Object registerClient(@RequestBody ClientRegisterRequest request) {
-        Object client = userRegisterDao.registerClient(request);
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(1).toUri();
+    @PostMapping("/register/client")
+    public ResponseEntity<ClientDto> registerClient(@RequestBody ClientRegisterRequest request) {
+        ClientDto client = userRegisterDao.registerClient(request);
+        URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/{id}")
+                .buildAndExpand(client.getId()).toUri();
+        return ResponseEntity.created(location).body(client);
+    }
+
+    @PostMapping("/register/business-client")
+    public ResponseEntity<BusinessClientDto> registerBusinessClient(@RequestBody BusinessClientRequest request) {
+        BusinessClientDto client = userRegisterDao.registerBusinessClient(request);
+        URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/{id}")
+                .buildAndExpand(client.getId()).toUri();
+        return ResponseEntity.created(location).body(client);
+    }
+
+    @PostMapping("/register/logistician")
+    public ResponseEntity<WorkerDto> registerLogistician(@RequestBody WorkerRegisterRequest request) {
+        WorkerDto client = userRegisterDao.registerWorker(request, WorkerType.LOGISTICIAN);
+        URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/{id}")
+                .buildAndExpand(client.getId()).toUri();
+        return ResponseEntity.created(location).body(client);
+    }
+
+    @PostMapping("/register/courier")
+    public ResponseEntity<WorkerDto> registerCourier(@RequestBody WorkerRegisterRequest request) {
+        WorkerDto client = userRegisterDao.registerWorker(request, WorkerType.COURIER);
+        URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/{id}")
+                .buildAndExpand(client.getId()).toUri();
         return ResponseEntity.created(location).body(client);
     }
 }

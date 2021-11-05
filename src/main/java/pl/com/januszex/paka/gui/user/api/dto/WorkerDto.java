@@ -3,9 +3,13 @@ package pl.com.januszex.paka.gui.user.api.dto;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.math.BigDecimal;
+
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class ClientRegisterRequest extends UserRequest {
+public class WorkerDto extends UserDto {
+    private BigDecimal salary;
+    private long warehouse;
     private String name;
     private String surname;
 }

@@ -19,10 +19,9 @@ import java.util.stream.Collectors;
 public class AppExceptionHandler extends DefaultHandlerExceptionResolver {
 
     @ExceptionHandler(RestTemplateException.class)
-    public ResponseEntity<ErrorResponse> businessLogicExceptionHandler(RestTemplateException ex) {
-        ErrorResponse error = new ErrorResponse(LocalDateTime.now(), ex.getMessage());
-        log.debug(ex.getMessage());
-        return new ResponseEntity<>(error, ex.getCode());
+    public ResponseEntity<Object> businessLogicExceptionHandler(RestTemplateException ex) {
+        log.debug("Request to {} with response {}", ex.getUrl(), ex.getUrl());
+        return new ResponseEntity<>(ex.getPayload(), ex.getCode());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
