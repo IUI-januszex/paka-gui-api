@@ -1,4 +1,4 @@
-package pl.com.januszex.paka.gui.parcel.infrastructure.dao;
+package pl.com.januszex.paka.gui.parcel.infrastructure;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
