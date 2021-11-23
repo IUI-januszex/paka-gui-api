@@ -10,5 +10,5 @@ public class UserDto {
     private String email;
     @JsonProperty(value = "isActive")
     private boolean active;
-    private int UserType;
+    private int userType;
 }
