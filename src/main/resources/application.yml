@@ -15,3 +15,7 @@ server:
     key-password: 'zaq12wsx'
     key-store: 'src/main/resources/keystore.jks'
     key-store-password: 'zaq12wsx'
+cache:
+  cache-enabled: true
+  redis-uri: 'reddis://localhost:6379'
+  expiration: 300

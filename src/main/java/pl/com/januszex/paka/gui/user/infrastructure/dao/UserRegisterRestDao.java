@@ -13,7 +13,7 @@ import java.net.URI;
 
 @Service
 @RequiredArgsConstructor
-public class UserRestDao implements UserRegisterDao {
+public class UserRegisterRestDao implements UserRegisterDao {
     private final RestTemplate restTemplate;
     private final RestServiceUrls restServiceUrls;
 
