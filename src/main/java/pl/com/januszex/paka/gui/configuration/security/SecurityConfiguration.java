@@ -54,8 +54,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         var filter = new CookieAuthFilter();
         filter.setAuthenticationManager(authenticationManagerBean());
-        http.cors()
-                .and()
+        http.cors().disable()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
@@ -66,11 +65,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/news/get/**",
                         "/user/login",
                         "/user/logout",
+                        "/**",
                         "/user/register/**",
                         "GET", "POST", "PUT", "PATCH")
                 .permitAll()
-                .antMatchers("/**")
-                .fullyAuthenticated()
                 .and()
                 .addFilter(filter);
     }

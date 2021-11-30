@@ -12,6 +12,7 @@ import pl.com.januszex.paka.gui.warehouse.api.dto.LocalWarehouseDto;
 import pl.com.januszex.paka.gui.warehouse.api.dto.LocalWarehouseRequestDto;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @RestController
@@ -55,7 +56,17 @@ public class WarehouseController {
 
     @GetMapping(path = "/local")
     public ResponseEntity<Collection<LocalWarehouseDto>> getLocalWarehouses() {
-        return ResponseEntity.ok(localWarehouseDao.getLocalWarehouses());
+        ArrayList<LocalWarehouseDto> lh = new ArrayList<>();
+        lh.add(LocalWarehouseDto.builder()
+                .active(true)
+                        .city("Kielce")
+                        .globalWarehouseId(1L)
+                        .id(1L)
+                        .number("2")
+                        .postalCode("21-370")
+                        .street("Papieska")
+                .build());
+        return ResponseEntity.ok(lh);
     }
 
     @GetMapping(path = "/local/{id}")
