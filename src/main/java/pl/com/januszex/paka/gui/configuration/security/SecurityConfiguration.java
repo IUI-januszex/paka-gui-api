@@ -12,6 +12,8 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @RequiredArgsConstructor
 @Configuration
@@ -48,6 +50,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 "/configuration/pl.com.januszex.paka.gui.configuration.security",
                 "/swagger-ui.html",
                 "/webjars/**");
+    }
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH")
+                        .allowCredentials(true)
+                        .exposedHeaders("Location")
+                        .allowedOrigins("*");
+            }
+        };
     }
 
     @Override
