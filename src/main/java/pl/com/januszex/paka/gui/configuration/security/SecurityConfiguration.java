@@ -61,7 +61,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH")
                         .allowCredentials(true)
                         .exposedHeaders("Location")
-                        .allowedOrigins("*");
+                        .allowedOriginPatterns("*");
             }
         };
     }
