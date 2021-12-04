@@ -9,12 +9,13 @@ import lombok.Data;
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class LocalWarehouseDto {
+    @JsonProperty("idWarehouse")
     private long id;
     private String city;
     private String street;
     private String number;
     private String postalCode;
     private boolean active;
-    @JsonProperty("idLocalWarehouse")
+    @JsonProperty("idGlobalWarehouse")
     private Long globalWarehouseId;
 }
