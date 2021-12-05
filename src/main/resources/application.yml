@@ -13,7 +13,7 @@ server:
     context-path: '/api'
   ssl:
     key-password: 'zaq12wsx'
-    key-store: 'src/main/resources/keystore.jks'
+    key-store: 'classpath:keystore.jks'
     key-store-password: 'zaq12wsx'
 cache:
   cache-enabled: false
