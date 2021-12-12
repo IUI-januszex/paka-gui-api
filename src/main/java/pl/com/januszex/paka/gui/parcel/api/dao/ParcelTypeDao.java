@@ -8,7 +8,10 @@ import pl.com.januszex.paka.gui.parcel.api.dto.ParcelTypeRequest;
 import java.util.Collection;
 
 public interface ParcelTypeDao {
+
     Collection<ParcelTypeDto> getAll();
+
+    Collection<ParcelTypeDto> getAllActive();
 
     ParcelTypeDto add(ParcelTypeRequest request);
 
