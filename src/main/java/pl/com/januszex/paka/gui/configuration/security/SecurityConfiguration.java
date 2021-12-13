@@ -82,10 +82,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/news/get/**",
                         "/user/login",
                         "/user/logout",
-                        "/user/register/**",
+                        "/parcel/*",
+                        "/parcel/*/states",
+                        "/parcel/*/delivery-attempt",
+                        "/parcel/*/move-date",
+                        "/parcel-type/active",
                         "GET", "POST", "PUT", "PATCH")
                 .permitAll()
-                .antMatchers("/**")
+                .anyRequest()
                 .fullyAuthenticated()
                 .and()
                 .addFilter(filter);

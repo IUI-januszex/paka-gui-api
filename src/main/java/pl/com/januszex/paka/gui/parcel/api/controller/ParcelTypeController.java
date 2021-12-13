@@ -43,6 +43,11 @@ public class ParcelTypeController {
         return new ResponseEntity<>(parcelTypeDao.getAll(), HttpStatus.OK);
     }
 
+    @GetMapping("/active")
+    public ResponseEntity<Collection<ParcelTypeDto>> getAllActive() {
+        return new ResponseEntity<>(parcelTypeDao.getAllActive(), HttpStatus.OK);
+    }
+
     @GetMapping(path = {"/{id}"})
     public ResponseEntity<ParcelTypeDto> getById(@PathVariable long id) {
         return new ResponseEntity<>(parcelTypeDao.getById(id),

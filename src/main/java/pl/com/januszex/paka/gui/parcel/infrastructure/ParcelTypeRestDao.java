@@ -29,6 +29,12 @@ class ParcelTypeRestDao implements ParcelTypeDao {
     }
 
     @Override
+    public Collection<ParcelTypeDto> getAllActive() {
+        URI uri = getBasePathBuilder().path("/active").build().toUri();
+        return Arrays.asList(Objects.requireNonNull(restTemplate.getForObject(uri, ParcelTypeDto[].class)));
+    }
+
+    @Override
     public ParcelTypeDto add(ParcelTypeRequest request) {
         return restTemplate.postForObject(getBaseUri(), request, ParcelTypeDto.class);
     }
