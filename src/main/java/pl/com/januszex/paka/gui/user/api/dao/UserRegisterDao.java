@@ -1,7 +1,13 @@
 package pl.com.januszex.paka.gui.user.api.dao;
 
-import pl.com.januszex.paka.gui.user.api.dto.ClientRegisterRequest;
+import pl.com.januszex.paka.gui.user.api.dto.*;
+import pl.com.januszex.paka.gui.user.domain.WorkerType;
 
 public interface UserRegisterDao {
-    Object registerClient(ClientRegisterRequest clientRegisterRequest);
+
+    ClientDto registerClient(ClientRegisterRequest clientRegisterRequest);
+
+    BusinessClientDto registerBusinessClient(BusinessClientRequest businessClientRequest);
+
+    WorkerDto registerWorker(WorkerRegisterRequest workerRegisterRequest, WorkerType type);
 }

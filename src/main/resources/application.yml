@@ -2,6 +2,7 @@ services:
   rest:
     urls:
       pakaFlowApiUrl: 'http://localhost:8081/api'
+      pakaWarehouseApiUrl: 'http://localhost:8082/api'
       pakaUsersApiUrl: 'http://localhost:5000/api'
   security:
     jwtSecret: 'rRYaQlIsv4TiaBuqVlCurRYaQlIsv4TiaBuqVlCu'
@@ -12,5 +13,9 @@ server:
     context-path: '/api'
   ssl:
     key-password: 'zaq12wsx'
-    key-store: 'src/main/resources/keystore.jks'
+    key-store: 'classpath:keystore.jks'
     key-store-password: 'zaq12wsx'
+cache:
+  cache-enabled: false
+  redis-uri: 'reddis://localhost:6379'
+  expiration: 300
