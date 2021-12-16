@@ -54,13 +54,13 @@ class LocalWarehouseRestDao implements LocalWarehouseDao {
 
     private URI getBaseUri(long id) {
         return UriComponentsBuilder.fromUriString(serviceUrls.getPakaWarehouseApiUrl())
-                .path("/LocalWarehouse/{id}")
+                .path("/warehouse/local/{id}")
                 .build(id);
     }
 
     private URI getBaseUri() {
         return UriComponentsBuilder.fromUriString(serviceUrls.getPakaWarehouseApiUrl())
-                .path("/LocalWarehouse")
+                .path("/warehouse/local")
                 .build()
                 .toUri();
     }

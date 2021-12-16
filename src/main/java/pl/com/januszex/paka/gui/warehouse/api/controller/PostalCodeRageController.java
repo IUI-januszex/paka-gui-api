@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pl.com.januszex.paka.gui.warehouse.api.dao.PostalCodeRangeDao;
 import pl.com.januszex.paka.gui.warehouse.api.dto.PostalCodeRangeDto;
+import pl.com.januszex.paka.gui.warehouse.api.dto.UpdatePostalCodeRangeDto;
 
 import java.net.URI;
 import java.util.Collection;
@@ -37,7 +38,7 @@ public class PostalCodeRageController {
 
     @PutMapping(path = "/{id}")
     public ResponseEntity<Object> update(@PathVariable String id,
-                                         @RequestBody PostalCodeRangeDto request) {
+                                         @RequestBody UpdatePostalCodeRangeDto request) {
         postalCodeRangeDao.update(id, request);
         return ResponseEntity.noContent().build();
     }

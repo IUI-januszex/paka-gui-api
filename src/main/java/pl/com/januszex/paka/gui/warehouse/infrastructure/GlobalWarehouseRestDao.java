@@ -54,13 +54,13 @@ class GlobalWarehouseRestDao implements GlobalWarehouseDao {
 
     private URI getBaseUri(long id) {
         return UriComponentsBuilder.fromUriString(serviceUrls.getPakaWarehouseApiUrl())
-                .path("/GlobalWarehouse/{id}")
+                .path("/warehouse/global/{id}")
                 .build(id);
     }
 
     private URI getBaseUri() {
         return UriComponentsBuilder.fromUriString(serviceUrls.getPakaWarehouseApiUrl())
-                .path("/GlobalWarehouse")
+                .path("/warehouse/global")
                 .build()
                 .toUri();
     }

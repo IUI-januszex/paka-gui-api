@@ -7,6 +7,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import pl.com.januszex.paka.gui.configuration.rest.RestServiceUrls;
 import pl.com.januszex.paka.gui.warehouse.api.dao.PostalCodeRangeDao;
 import pl.com.januszex.paka.gui.warehouse.api.dto.PostalCodeRangeDto;
+import pl.com.januszex.paka.gui.warehouse.api.dto.UpdatePostalCodeRangeDto;
 
 import java.net.URI;
 import java.util.Arrays;
@@ -39,7 +40,7 @@ class PostalCodeRangeRestDao implements PostalCodeRangeDao {
     }
 
     @Override
-    public void update(String id, PostalCodeRangeDto request) {
+    public void update(String id, UpdatePostalCodeRangeDto request) {
         URI uri = getBaseUri(id);
         restTemplate.put(uri, request);
     }
@@ -52,13 +53,13 @@ class PostalCodeRangeRestDao implements PostalCodeRangeDao {
 
     private URI getBaseUri(String id) {
         return UriComponentsBuilder.fromUriString(serviceUrls.getPakaWarehouseApiUrl())
-                .path("/RangePostalCode/{id}")
+                .path("/postal-code/{id}")
                 .build(id);
     }
 
     private URI getBaseUri() {
         return UriComponentsBuilder.fromUriString(serviceUrls.getPakaWarehouseApiUrl())
-                .path("/RangePostalCode")
+                .path("/postal-code")
                 .build()
                 .toUri();
     }
