@@ -20,8 +20,10 @@ public class LoginRestDao implements LoginDao {
 
     @Override
     public LoginDto login(LoginRequest loginRequest) {
-        LoginDto loginDto = new LoginDto();
-        loginDto.setToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6ImM5OWJkZjkxLTZiOWItNDI0OC04ZDg3LTg1OGQxZDE0MDE4MCIsIlVzZXJOYW1lIjoiYWRtaW4iLCJSb2xlIjoiQWRtaW4iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbiIsImV4cCI6MTY2OTkyODc5MCwiaXNzIjoiVGVzdCIsImF1ZCI6IlRlc3QifQ.93lAgEs8SDrQzbNyu0fEkD-ZDIN51PZ_tNvvxGBXkMg");
-        return loginDto;
+        URI uri = UriComponentsBuilder.fromUri(URI.create(restServiceUrls.getPakaUsersApiUrl()))
+                .path("/authenticate/login")
+                .build()
+                .toUri();
+        return restTemplate.postForObject(uri, loginRequest, LoginDto.class);
     }
 }
