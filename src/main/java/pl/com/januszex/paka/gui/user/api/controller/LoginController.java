@@ -34,12 +34,6 @@ public class LoginController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping
-    @PreAuthorize("hasRole('Admin')")
-    public String foo() {
-        return "foo";
-    }
-
     private Cookie getCookie(String value, int age) {
         Cookie cookie = new Cookie(CookieAuthFilter.COOKIE_TOKEN, value);
         cookie.setSecure(true);
