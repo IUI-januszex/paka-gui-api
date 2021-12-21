@@ -29,4 +29,12 @@ public class AddressBookController {
                 .build().toUri();
         return ResponseEntity.created(location).body(record);
     }
+
+    @DeleteMapping()
+    public ResponseEntity<Void> deleteAddressBookRecord(long id){
+        addressBookDao.deleteAddressBookRecord(id);
+        URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/address-book/{id}")
+                .buildAndExpand(id).toUri();
+        return ResponseEntity.noContent().build();
+    }
 }
