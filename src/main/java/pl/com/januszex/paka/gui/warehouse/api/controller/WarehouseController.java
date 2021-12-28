@@ -6,10 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pl.com.januszex.paka.gui.warehouse.api.dao.GlobalWarehouseDao;
 import pl.com.januszex.paka.gui.warehouse.api.dao.LocalWarehouseDao;
-import pl.com.januszex.paka.gui.warehouse.api.dto.GlobalWarehouseDto;
-import pl.com.januszex.paka.gui.warehouse.api.dto.GlobalWarehouseRequestDto;
-import pl.com.januszex.paka.gui.warehouse.api.dto.LocalWarehouseDto;
-import pl.com.januszex.paka.gui.warehouse.api.dto.LocalWarehouseRequestDto;
+import pl.com.januszex.paka.gui.warehouse.api.dto.*;
 
 import java.net.URI;
 import java.util.Collection;
@@ -53,6 +50,11 @@ public class WarehouseController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping(path = "/global/{id}/parcels")
+    public ResponseEntity<WarehouseParcelsDto> getParcelsFromGlobal(@PathVariable long id) {
+        return ResponseEntity.ok(globalWarehouseDao.getParcels(id));
+    }
+
     @GetMapping(path = "/local")
     public ResponseEntity<Collection<LocalWarehouseDto>> getLocalWarehouses() {
         return ResponseEntity.ok(localWarehouseDao.getLocalWarehouses());
@@ -82,5 +84,10 @@ public class WarehouseController {
     public ResponseEntity<Object> deleteLocalWarehouseById(@PathVariable long id) {
         localWarehouseDao.deleteLocalWarehouse(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(path = "/local/{id}/parcels")
+    public ResponseEntity<WarehouseParcelsDto> getParcelsFromLocal(@PathVariable long id) {
+        return ResponseEntity.ok(localWarehouseDao.getParcels(id));
     }
 }

@@ -8,6 +8,7 @@ import pl.com.januszex.paka.gui.configuration.rest.RestServiceUrls;
 import pl.com.januszex.paka.gui.warehouse.api.dao.GlobalWarehouseDao;
 import pl.com.januszex.paka.gui.warehouse.api.dto.GlobalWarehouseDto;
 import pl.com.januszex.paka.gui.warehouse.api.dto.GlobalWarehouseRequestDto;
+import pl.com.januszex.paka.gui.warehouse.api.dto.WarehouseParcelsDto;
 
 import java.net.URI;
 import java.util.Arrays;
@@ -50,6 +51,14 @@ class GlobalWarehouseRestDao implements GlobalWarehouseDao {
         URI uri = getBaseUri(id);
         restTemplate.delete(uri);
 
+    }
+
+    @Override
+    public WarehouseParcelsDto getParcels(long id) {
+        var uri = UriComponentsBuilder.fromUriString(serviceUrls.getPakaFlowApiUrl())
+                .path("/warehouse/global/{id}")
+                .build(id);
+        return restTemplate.getForObject(uri, WarehouseParcelsDto.class);
     }
 
     private URI getBaseUri(long id) {
