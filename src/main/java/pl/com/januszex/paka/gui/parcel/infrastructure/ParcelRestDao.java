@@ -114,7 +114,7 @@ class ParcelRestDao implements ParcelDao {
 
     private UriComponentsBuilder getParcelPath() {
         return UriComponentsBuilder.fromUriString(restServiceUrls.getPakaFlowApiUrl())
-                .path("/{id}");
+                .path("/parcel/{id}");
     }
 
     private void performPostOperation(long id, MoveCourierArrivalDateRequest request, String subPath) {
