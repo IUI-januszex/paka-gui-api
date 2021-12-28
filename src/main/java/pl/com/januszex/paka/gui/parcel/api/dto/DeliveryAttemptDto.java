@@ -1,25 +1,19 @@
-package pl.com.januszex.paka.flow.delivery.api;
+package pl.com.januszex.paka.gui.parcel.api.dto;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.Value;
-import pl.com.januszex.paka.flow.delivery.model.DeliveryAttempt;
+import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Value
+@Data
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class DeliveryAttemptResponse {
+public class DeliveryAttemptDto {
 
     long id;
 
     LocalDateTime dateTime;
 
     long parcelId;
-
-
-    public static DeliveryAttemptResponse of(DeliveryAttempt model) {
-        return new DeliveryAttemptResponse(model.getId(), model.getDateTime(), model.getParcel().getId());
-    }
 
 }

@@ -1,7 +1,7 @@
-package pl.com.januszex.paka.flow.parcel.api.request;
+package pl.com.januszex.paka.gui.parcel.api.dto;
 
 import lombok.Data;
-import pl.com.januszex.paka.flow.address.api.request.AddressRequest;
+import pl.com.januszex.paka.gui.address.AddressDto;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
@@ -15,11 +15,11 @@ public class ParcelRequest {
 
     @NotNull(message = "Provide sender address")
     @Valid
-    private AddressRequest senderAddress;
+    private AddressDto senderAddress;
 
     @NotNull(message = "Provide delivery address")
     @Valid
-    private AddressRequest deliveryAddress;
+    private AddressDto deliveryAddress;
 
     @NotNull(message = "Provide parcel type")
     private Long parcelType;
