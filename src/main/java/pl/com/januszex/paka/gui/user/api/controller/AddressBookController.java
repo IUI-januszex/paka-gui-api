@@ -5,8 +5,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pl.com.januszex.paka.gui.user.api.dao.AddressBookDao;
-import pl.com.januszex.paka.gui.user.api.dao.UserRegisterDao;
-import pl.com.januszex.paka.gui.user.api.dto.*;
+import pl.com.januszex.paka.gui.user.api.dto.AddAddressBookRecordDto;
+import pl.com.januszex.paka.gui.user.api.dto.AddAddressBookRecordRequest;
+import pl.com.januszex.paka.gui.user.api.dto.AddressBookRecordDto;
 
 import java.net.URI;
 import java.util.Collection;
@@ -17,24 +18,22 @@ import java.util.Collection;
 public class AddressBookController {
     private final AddressBookDao addressBookDao;
 
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<Collection<AddressBookRecordDto>> getCurrentUserAddressBook() {
         return ResponseEntity.ok(addressBookDao.getAddressBook());
     }
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<AddAddressBookRecordDto> addAddressBookRecord(@RequestBody AddAddressBookRecordRequest request) {
-        AddAddressBookRecordDto record = addressBookDao.addAddressBookRecord(request);
-        URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/address-book")
+        AddAddressBookRecordDto addAddressBookRecord = addressBookDao.addAddressBookRecord(request);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .build().toUri();
-        return ResponseEntity.created(location).body(record);
+        return ResponseEntity.created(location).body(addAddressBookRecord);
     }
 
-    @DeleteMapping()
-    public ResponseEntity<Void> deleteAddressBookRecord(long id){
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<Void> deleteAddressBookRecord(@PathVariable long id) {
         addressBookDao.deleteAddressBookRecord(id);
-        URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/address-book/{id}")
-                .buildAndExpand(id).toUri();
         return ResponseEntity.noContent().build();
     }
 }
