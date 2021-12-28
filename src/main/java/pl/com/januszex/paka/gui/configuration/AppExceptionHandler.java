@@ -20,7 +20,7 @@ public class AppExceptionHandler extends DefaultHandlerExceptionResolver {
 
     @ExceptionHandler(RestTemplateException.class)
     public ResponseEntity<Object> businessLogicExceptionHandler(RestTemplateException ex) {
-        log.debug("Request to {} with response {}", ex.getUrl(), ex.getUrl());
+        log.debug("Request to {} with response {}", ex.getUrl(), ex.getCode());
         return new ResponseEntity<>(ex.getPayload(), ex.getCode());
     }
 
