@@ -2,8 +2,10 @@ package pl.com.januszex.paka.gui.user.api.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import pl.com.januszex.paka.gui.configuration.security.CookieAuthFilter;
 import pl.com.januszex.paka.gui.configuration.security.JwtService;
 import pl.com.januszex.paka.gui.user.api.dao.LoginDao;
@@ -32,12 +34,6 @@ public class LoginController {
         Cookie cookie = getCookie(null, 0);
         response.addCookie(cookie);
         return ResponseEntity.noContent().build();
-    }
-
-    @GetMapping
-    @PreAuthorize("hasRole('Admin')")
-    public String foo() {
-        return "foo";
     }
 
     private Cookie getCookie(String value, int age) {

@@ -34,8 +34,10 @@ class MeServiceAdapter implements MeServicePort {
     @SneakyThrows
     private UserDto getUserFromDaoAndCache() {
         UserDto userDto = userDao.me();
-        String userJson = objectMapper.writeValueAsString(userDto);
-        jedis.set(userDto.getId(), userJson, new SetParams().ex(cacheConfiguration.getExpiration()));
+        if (cacheConfiguration.isCacheEnabled()) {
+            String userJson = objectMapper.writeValueAsString(userDto);
+            jedis.set(userDto.getId(), userJson, new SetParams().ex(cacheConfiguration.getExpiration()));
+        }
         return userDto;
     }
 
