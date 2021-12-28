@@ -58,6 +58,55 @@ class ParcelRestDao implements ParcelDao {
         return Arrays.asList(Objects.requireNonNull(restTemplate.getForObject(uri, DeliveryAttemptDto[].class)));
     }
 
+    @Override
+    public void assignParcelToCourier(long id, AssignParcelToCourierRequest request) {
+        URI uri = getParcelPath().path("/assign").build(id);
+        restTemplate.postForObject(uri, request, Void.class);
+    }
+
+    @Override
+    public void pickUpParcel(long id) {
+        performPostOperation(id, null, "/pick-up");
+    }
+
+    @Override
+    public void returnToWarehouse(long id) {
+        performPostOperation(id, null, "/return-to-warehouse");
+    }
+
+    @Override
+    public void deliverToWarehouse(long id, DeliverToWarehouseRequest request) {
+        URI uri = getParcelPath().path("/deliver-to-warehouse").build(id);
+        restTemplate.postForObject(uri, request, Void.class);
+    }
+
+    @Override
+    public void deliverToClient(long id) {
+        performPostOperation(id, null, "/return-to-client");
+    }
+
+    @Override
+    public void moveDate(long id, MoveCourierArrivalDateRequest request) {
+        performPostOperation(id, request, "/move-date");
+    }
+
+    @Override
+    public void payParcel(long id, ParcelPaidRequest request) {
+        URI uri = getParcelPath().path("/pay").build(id);
+        restTemplate.put(uri, request);
+    }
+
+    @Override
+    public void payParcelFee(long id, ParcelPaidRequest request) {
+        URI uri = getParcelPath().path("/pay-fee").build(id);
+        restTemplate.put(uri, request);
+    }
+
+    @Override
+    public void addDeliveryAttempt(long id) {
+        performPostOperation(id, null, "/delivery-attempt");
+    }
+
     private URI getParcelUri(long id) {
         return getParcelPath()
                 .build(id);
@@ -66,5 +115,10 @@ class ParcelRestDao implements ParcelDao {
     private UriComponentsBuilder getParcelPath() {
         return UriComponentsBuilder.fromUriString(restServiceUrls.getPakaFlowApiUrl())
                 .path("/{id}");
+    }
+
+    private void performPostOperation(long id, MoveCourierArrivalDateRequest request, String subPath) {
+        URI uri = getParcelPath().path(subPath).build(id);
+        restTemplate.postForObject(uri, request, Void.class);
     }
 }

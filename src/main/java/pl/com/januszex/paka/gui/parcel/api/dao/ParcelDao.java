@@ -16,4 +16,22 @@ public interface ParcelDao {
     Collection<ParcelStateDto> getStates(long id);
 
     Collection<DeliveryAttemptDto> getDeliveryAttempts(long id);
+
+    void assignParcelToCourier(long id, AssignParcelToCourierRequest request);
+
+    void pickUpParcel(long id);
+
+    void returnToWarehouse(long id);
+
+    void deliverToWarehouse(long id, DeliverToWarehouseRequest request);
+
+    void deliverToClient(long id);
+
+    void moveDate(long id, MoveCourierArrivalDateRequest request);
+
+    void payParcel(long id, ParcelPaidRequest request);
+
+    void payParcelFee(long id, ParcelPaidRequest request);
+
+    void addDeliveryAttempt(long id);
 }
