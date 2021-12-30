@@ -49,6 +49,8 @@ public class RestTemplateExceptionHandling extends DefaultResponseErrorHandler {
         }
         else if (errorJson.has("type") && errorJson.has("errors")) {
             return handleDotNetValidationError(errorJson);
+        } else if (errorJson.has("detail")) {
+            return handleDjangoWrongMethodError(errorJson);
         }
 
         return new ErrorResponse(LocalDateTime.now(), errorJsonString);
@@ -78,6 +80,10 @@ public class RestTemplateExceptionHandling extends DefaultResponseErrorHandler {
             }
         }
         return new ErrorResponse(LocalDateTime.now(), message.toString());
+    }
+
+    private ErrorResponse handleDjangoWrongMethodError(JSONObject errorJson) {
+        return new ErrorResponse(LocalDateTime.now(), errorJson.getString("detail"));
     }
 
 }
