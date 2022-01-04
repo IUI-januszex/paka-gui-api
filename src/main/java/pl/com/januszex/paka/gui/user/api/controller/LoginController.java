@@ -23,14 +23,14 @@ public class LoginController {
     private final LoginDao loginDao;
 
     @PostMapping("/login")
-    public ResponseEntity<Object> login(@RequestBody LoginRequest request, HttpServletResponse response) {
+    public ResponseEntity<Void> login(@RequestBody LoginRequest request, HttpServletResponse response) {
         Cookie cookie = getCookie(loginDao.login(request).getToken(), -1);
         response.addCookie(cookie);
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<Object> logout(HttpServletResponse response) {
+    public ResponseEntity<Void> logout(HttpServletResponse response) {
         Cookie cookie = getCookie(null, 0);
         response.addCookie(cookie);
         return ResponseEntity.noContent().build();

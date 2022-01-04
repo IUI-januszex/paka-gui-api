@@ -53,20 +53,22 @@ public class RestTemplateExceptionHandling extends DefaultResponseErrorHandler {
             return handleDjangoWrongMethodError(errorJson);
         }
 
-        return new ErrorResponse(LocalDateTime.now(), errorJsonString);
+        return new ErrorResponse(LocalDateTime.now().toString(), errorJsonString);
     }
 
     @SneakyThrows
     private ErrorResponse handleStandardError(JSONObject errorJson) {
-        return objectMapper.readValue(errorJson.toString(), ErrorResponse.class);
+        ErrorResponse errorResponse = objectMapper.readValue(errorJson.toString(), ErrorResponse.class);
+        errorResponse.setTimestamp(LocalDateTime.now().toString());
+        return errorResponse;
     }
 
     private ErrorResponse handleSpringError(JSONObject errorJson) {
         if(errorJson.getString("error").equals("Forbidden")) {
-            return new ErrorResponse(LocalDateTime.now(), String.format("Path %s is forbidden.",
+            return new ErrorResponse(LocalDateTime.now().toString(), String.format("Path %s is forbidden.",
                     errorJson.getString("path")));
         }
-        return new ErrorResponse(LocalDateTime.now(), errorJson.getString("error"));
+        return new ErrorResponse(LocalDateTime.now().toString(), errorJson.getString("error"));
     }
 
     private ErrorResponse handleDotNetValidationError(JSONObject errorJson) {
@@ -79,11 +81,11 @@ public class RestTemplateExceptionHandling extends DefaultResponseErrorHandler {
                 message.append(" ");
             }
         }
-        return new ErrorResponse(LocalDateTime.now(), message.toString());
+        return new ErrorResponse(LocalDateTime.now().toString(), message.toString());
     }
 
     private ErrorResponse handleDjangoWrongMethodError(JSONObject errorJson) {
-        return new ErrorResponse(LocalDateTime.now(), errorJson.getString("detail"));
+        return new ErrorResponse(LocalDateTime.now().toString(), errorJson.getString("detail"));
     }
 
 }

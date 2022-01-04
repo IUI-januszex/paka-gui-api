@@ -27,7 +27,7 @@ public class AppExceptionHandler extends DefaultHandlerExceptionResolver {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> radiationException(MethodArgumentNotValidException ex) {
         String errorMessage = getFieldErrorMessages(ex);
-        return new ResponseEntity<>(new ErrorResponse(LocalDateTime.now(),
+        return new ResponseEntity<>(new ErrorResponse(LocalDateTime.now().toString(),
                 errorMessage),
                 HttpStatus.BAD_REQUEST);
     }

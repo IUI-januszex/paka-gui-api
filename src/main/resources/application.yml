@@ -2,7 +2,7 @@ services:
   rest:
     urls:
       pakaFlowApiUrl: 'http://localhost:8081/api'
-      pakaWarehouseApiUrl: 'http://localhost:8082/api'
+      pakaWarehouseApiUrl: 'http://localhost:8083/api'
       pakaUsersApiUrl: 'http://localhost:5000/api'
   security:
     jwtSecret: 'rRYaQlIsv4TiaBuqVlCurRYaQlIsv4TiaBuqVlCu'
