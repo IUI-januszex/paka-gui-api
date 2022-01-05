@@ -6,12 +6,16 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 import pl.com.januszex.paka.gui.configuration.rest.RestServiceUrls;
 import pl.com.januszex.paka.gui.user.api.dao.UserDao;
+import pl.com.januszex.paka.gui.user.api.dto.ActivationDto;
 import pl.com.januszex.paka.gui.user.api.dto.CourierParcelsDto;
 import pl.com.januszex.paka.gui.user.api.dto.UserDto;
 import pl.com.januszex.paka.gui.user.api.dto.UserParcels;
 import pl.com.januszex.paka.gui.user.api.service.CurrentUserServicePort;
 
 import java.net.URI;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -41,5 +45,19 @@ class UserRestDao implements UserDao {
         URI uri = UriComponentsBuilder.fromUriString(restServiceUrls.getPakaFlowApiUrl()).pathSegment("/me/parcels")
                 .build().toUri();
         return restTemplate.getForObject(uri, UserParcels.class);
+    }
+
+    @Override
+    public void changeActiveStatus(String id, ActivationDto activation) {
+        URI uri = UriComponentsBuilder.fromUriString(restServiceUrls.getPakaUsersApiUrl()).path("/user/activate-user/{id}")
+                .build(id);
+        restTemplate.put(uri, activation);
+    }
+
+    @Override
+    public Collection<UserDto> getAllUsers() {
+        URI uri = UriComponentsBuilder.fromUriString(restServiceUrls.getPakaUsersApiUrl()).pathSegment("/user")
+                .build().toUri();
+        return Arrays.asList(Objects.requireNonNull(restTemplate.getForObject(uri, UserDto[].class)));
     }
 }

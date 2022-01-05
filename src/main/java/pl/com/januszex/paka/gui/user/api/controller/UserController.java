@@ -11,6 +11,7 @@ import pl.com.januszex.paka.gui.user.api.service.MeServicePort;
 import pl.com.januszex.paka.gui.user.domain.WorkerType;
 
 import java.net.URI;
+import java.util.Collection;
 
 @RestController
 @RequestMapping("/user")
@@ -61,5 +62,16 @@ public class UserController {
         URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path(USER_BY_ID_ENDPOINT_URL)
                 .buildAndExpand(client.getId()).toUri();
         return ResponseEntity.created(location).body(client);
+    }
+
+    @PutMapping("/activate/{id}")
+    public ResponseEntity<Void> changeActivationStatus(@PathVariable String id, @RequestBody ActivationDto request) {
+        userDao.changeActiveStatus(id, request);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping
+    public ResponseEntity<Collection<UserDto>> getAllUsers() {
+        return ResponseEntity.ok(userDao.getAllUsers());
     }
 }
