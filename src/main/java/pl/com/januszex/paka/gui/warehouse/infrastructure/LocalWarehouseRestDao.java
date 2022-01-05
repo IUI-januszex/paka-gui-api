@@ -65,7 +65,7 @@ class LocalWarehouseRestDao implements LocalWarehouseDao {
     @Override
     public Collection<PostalCodeRangeDto> getPostalCodes(long id) {
         var uri = UriComponentsBuilder.fromUriString(serviceUrls.getPakaWarehouseApiUrl())
-                .path("/warehouse/local/{id}/postal-cde")
+                .path("/warehouse/local/{id}/postal-code")
                 .build(id);
         return Arrays.asList(Objects.requireNonNull(restTemplate.getForObject(uri, PostalCodeRangeDto[].class)));
     }
