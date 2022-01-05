@@ -8,6 +8,7 @@ import pl.com.januszex.paka.gui.configuration.rest.RestServiceUrls;
 import pl.com.januszex.paka.gui.warehouse.api.dao.LocalWarehouseDao;
 import pl.com.januszex.paka.gui.warehouse.api.dto.LocalWarehouseDto;
 import pl.com.januszex.paka.gui.warehouse.api.dto.LocalWarehouseRequestDto;
+import pl.com.januszex.paka.gui.warehouse.api.dto.PostalCodeRangeDto;
 import pl.com.januszex.paka.gui.warehouse.api.dto.WarehouseParcelsDto;
 
 import java.net.URI;
@@ -59,6 +60,14 @@ class LocalWarehouseRestDao implements LocalWarehouseDao {
                 .path("/warehouse/local/{id}")
                 .build(id);
         return restTemplate.getForObject(uri, WarehouseParcelsDto.class);
+    }
+
+    @Override
+    public Collection<PostalCodeRangeDto> getPostalCodes(long id) {
+        var uri = UriComponentsBuilder.fromUriString(serviceUrls.getPakaWarehouseApiUrl())
+                .path("/warehouse/local/{id}/postal-cde")
+                .build(id);
+        return Arrays.asList(Objects.requireNonNull(restTemplate.getForObject(uri, PostalCodeRangeDto[].class)));
     }
 
     private URI getBaseUri(long id) {

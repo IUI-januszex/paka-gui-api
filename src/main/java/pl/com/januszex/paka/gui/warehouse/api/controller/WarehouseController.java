@@ -90,4 +90,9 @@ public class WarehouseController {
     public ResponseEntity<WarehouseParcelsDto> getParcelsFromLocal(@PathVariable long id) {
         return ResponseEntity.ok(localWarehouseDao.getParcels(id));
     }
+
+    @GetMapping(path = "/local/{id}/postal-code")
+    public ResponseEntity<Collection<PostalCodeRangeDto>> getPostalCodesFromGlobal(@PathVariable long id) {
+        return ResponseEntity.ok(localWarehouseDao.getPostalCodes(id));
+    }
 }

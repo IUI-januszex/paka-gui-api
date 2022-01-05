@@ -8,6 +8,7 @@ import pl.com.januszex.paka.gui.configuration.rest.RestServiceUrls;
 import pl.com.januszex.paka.gui.warehouse.api.dao.GlobalWarehouseDao;
 import pl.com.januszex.paka.gui.warehouse.api.dto.GlobalWarehouseDto;
 import pl.com.januszex.paka.gui.warehouse.api.dto.GlobalWarehouseRequestDto;
+import pl.com.januszex.paka.gui.warehouse.api.dto.PostalCodeRangeDto;
 import pl.com.januszex.paka.gui.warehouse.api.dto.WarehouseParcelsDto;
 
 import java.net.URI;
