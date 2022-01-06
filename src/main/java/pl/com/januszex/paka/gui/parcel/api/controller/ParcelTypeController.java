@@ -7,10 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pl.com.januszex.paka.gui.parcel.api.dao.ParcelTypeDao;
-import pl.com.januszex.paka.gui.parcel.api.dto.ParcelTypeAssignedParcelCountDto;
-import pl.com.januszex.paka.gui.parcel.api.dto.ParcelTypeChangeActivatedRequest;
-import pl.com.januszex.paka.gui.parcel.api.dto.ParcelTypeDto;
-import pl.com.januszex.paka.gui.parcel.api.dto.ParcelTypeRequest;
+import pl.com.januszex.paka.gui.parcel.api.dto.*;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -39,7 +36,7 @@ public class ParcelTypeController {
     }
 
     @GetMapping
-    public ResponseEntity<Collection<ParcelTypeDto>> getAll() {
+    public ResponseEntity<Collection<ParcelTypeAdminDto>> getAll() {
         return new ResponseEntity<>(parcelTypeDao.getAll(), HttpStatus.OK);
     }
 
