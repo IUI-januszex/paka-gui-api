@@ -23,4 +23,5 @@ public class ParcelBriefDto {
     private boolean parcelPaid;
     @JsonProperty("isMoveable")
     private boolean moveable;
+    private ParcelStateDto currentState;
 }
