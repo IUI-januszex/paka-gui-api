@@ -109,13 +109,13 @@ class ParcelRestDao implements ParcelDao {
 
     @Override
     public void addParcelToObserved(long id) {
-        URI uri = getParcelPath().path("observe").build(id);
+        URI uri = getParcelPath().path("/observe").build(id);
         restTemplate.postForEntity(uri, null, Void.class);
     }
 
     @Override
     public void removeParcelFromObserved(long id) {
-        URI uri = getParcelPath().path("observe").build(id);
+        URI uri = getParcelPath().path("/observe").build(id);
         restTemplate.delete(uri);
 
     }
