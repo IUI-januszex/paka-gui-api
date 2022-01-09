@@ -1,15 +1,12 @@
 package pl.com.januszex.paka.gui.parcel.api.dao;
 
-import pl.com.januszex.paka.gui.parcel.api.dto.ParcelTypeAssignedParcelCountDto;
-import pl.com.januszex.paka.gui.parcel.api.dto.ParcelTypeChangeActivatedRequest;
-import pl.com.januszex.paka.gui.parcel.api.dto.ParcelTypeDto;
-import pl.com.januszex.paka.gui.parcel.api.dto.ParcelTypeRequest;
+import pl.com.januszex.paka.gui.parcel.api.dto.*;
 
 import java.util.Collection;
 
 public interface ParcelTypeDao {
 
-    Collection<ParcelTypeDto> getAll();
+    Collection<ParcelTypeAdminDto> getAll();
 
     Collection<ParcelTypeDto> getAllActive();
 

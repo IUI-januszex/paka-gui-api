@@ -6,10 +6,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 import pl.com.januszex.paka.gui.configuration.rest.RestServiceUrls;
 import pl.com.januszex.paka.gui.parcel.api.dao.ParcelTypeDao;
-import pl.com.januszex.paka.gui.parcel.api.dto.ParcelTypeAssignedParcelCountDto;
-import pl.com.januszex.paka.gui.parcel.api.dto.ParcelTypeChangeActivatedRequest;
-import pl.com.januszex.paka.gui.parcel.api.dto.ParcelTypeDto;
-import pl.com.januszex.paka.gui.parcel.api.dto.ParcelTypeRequest;
+import pl.com.januszex.paka.gui.parcel.api.dto.*;
 
 import java.net.URI;
 import java.util.Arrays;
@@ -24,8 +21,8 @@ class ParcelTypeRestDao implements ParcelTypeDao {
     private final RestServiceUrls restServiceUrls;
 
     @Override
-    public Collection<ParcelTypeDto> getAll() {
-        return Arrays.asList(Objects.requireNonNull(restTemplate.getForObject(getBaseUri(), ParcelTypeDto[].class)));
+    public Collection<ParcelTypeAdminDto> getAll() {
+        return Arrays.asList(Objects.requireNonNull(restTemplate.getForObject(getBaseUri(), ParcelTypeAdminDto[].class)));
     }
 
     @Override
