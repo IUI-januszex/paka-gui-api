@@ -107,6 +107,19 @@ class ParcelRestDao implements ParcelDao {
         performPostOperation(id, null, "/delivery-attempt");
     }
 
+    @Override
+    public void addParcelToObserved(long id) {
+        URI uri = getParcelPath().path("observe").build(id);
+        restTemplate.postForEntity(uri, null, Void.class);
+    }
+
+    @Override
+    public void removeParcelFromObserved(long id) {
+        URI uri = getParcelPath().path("observe").build(id);
+        restTemplate.delete(uri);
+
+    }
+
     private URI getParcelUri(long id) {
         return getParcelPath()
                 .build(id);

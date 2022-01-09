@@ -80,4 +80,16 @@ public class ParcelOperationController {
         return ResponseEntity.noContent().build();
     }
 
+    @PostMapping(path = "observe")
+    public ResponseEntity<Void> addParcelToObserve(@PathVariable("id") long id) {
+        parcelDao.addParcelToObserved(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping(path = "observe")
+    public ResponseEntity<Void> deleteParcelToObserve(@PathVariable("id") long id) {
+        parcelDao.removeParcelFromObserved(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

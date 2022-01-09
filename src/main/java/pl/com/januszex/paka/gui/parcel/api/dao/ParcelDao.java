@@ -34,4 +34,8 @@ public interface ParcelDao {
     void payParcelFee(long id, ParcelPaidRequest request);
 
     void addDeliveryAttempt(long id);
+
+    void addParcelToObserved(long id);
+
+    void removeParcelFromObserved(long id);
 }
