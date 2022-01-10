@@ -11,6 +11,7 @@ import java.util.Collection;
 @Data
 public class ParcelDetailDto {
     private long id;
+    private ParcelTypeDto type;
     private String senderInfo;
     private String receiverInfo;
     private AddressDto senderAddress;

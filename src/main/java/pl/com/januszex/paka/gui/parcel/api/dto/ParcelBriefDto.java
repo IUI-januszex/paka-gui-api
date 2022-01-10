@@ -10,6 +10,7 @@ import java.time.LocalDate;
 @Data
 public class ParcelBriefDto {
     private long id;
+    private ParcelTypeDto type;
     private String senderInfo;
     private String receiverInfo;
     private AddressDto senderAddress;
