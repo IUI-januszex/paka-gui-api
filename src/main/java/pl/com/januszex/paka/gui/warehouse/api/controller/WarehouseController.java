@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import pl.com.januszex.paka.gui.user.api.dao.UserDao;
+import pl.com.januszex.paka.gui.user.api.dto.WorkerDto;
 import pl.com.januszex.paka.gui.warehouse.api.dao.GlobalWarehouseDao;
 import pl.com.januszex.paka.gui.warehouse.api.dao.LocalWarehouseDao;
 import pl.com.januszex.paka.gui.warehouse.api.dto.*;
@@ -18,6 +20,7 @@ public class WarehouseController {
 
     private final GlobalWarehouseDao globalWarehouseDao;
     private final LocalWarehouseDao localWarehouseDao;
+    private final UserDao userDao;
 
     @GetMapping(path = "/global")
     public ResponseEntity<Collection<GlobalWarehouseDto>> getGlobalWarehouses() {
@@ -53,6 +56,11 @@ public class WarehouseController {
     @GetMapping(path = "/global/{id}/parcels")
     public ResponseEntity<WarehouseParcelsDto> getParcelsFromGlobal(@PathVariable long id) {
         return ResponseEntity.ok(globalWarehouseDao.getParcels(id));
+    }
+
+    @GetMapping(path = "/global/{id}/courier")
+    public ResponseEntity<Collection<WorkerDto>> getCouriersFromGlobal(@PathVariable long id) {
+        return ResponseEntity.ok(userDao.getCouriersFromWarehouse(WarehouseType.GLOBAL, id));
     }
 
     @GetMapping(path = "/local")
@@ -92,7 +100,12 @@ public class WarehouseController {
     }
 
     @GetMapping(path = "/local/{id}/postal-code")
-    public ResponseEntity<Collection<PostalCodeRangeDto>> getPostalCodesFromGlobal(@PathVariable long id) {
+    public ResponseEntity<Collection<PostalCodeRangeDto>> getPostalCodes(@PathVariable long id) {
         return ResponseEntity.ok(localWarehouseDao.getPostalCodes(id));
+    }
+
+    @GetMapping(path = "/local/{id}/courier")
+    public ResponseEntity<Collection<WorkerDto>> getCouriersFromLocal(@PathVariable long id) {
+        return ResponseEntity.ok(userDao.getCouriersFromWarehouse(WarehouseType.LOCAL, id));
     }
 }

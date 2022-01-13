@@ -6,11 +6,9 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 import pl.com.januszex.paka.gui.configuration.rest.RestServiceUrls;
 import pl.com.januszex.paka.gui.user.api.dao.UserDao;
-import pl.com.januszex.paka.gui.user.api.dto.ActivationDto;
-import pl.com.januszex.paka.gui.user.api.dto.CourierParcelsDto;
-import pl.com.januszex.paka.gui.user.api.dto.UserDto;
-import pl.com.januszex.paka.gui.user.api.dto.UserParcels;
+import pl.com.januszex.paka.gui.user.api.dto.*;
 import pl.com.januszex.paka.gui.user.api.service.CurrentUserServicePort;
+import pl.com.januszex.paka.gui.warehouse.api.dto.WarehouseType;
 
 import java.net.URI;
 import java.util.Arrays;
@@ -59,5 +57,15 @@ class UserRestDao implements UserDao {
         URI uri = UriComponentsBuilder.fromUriString(restServiceUrls.getPakaUsersApiUrl()).pathSegment("/user")
                 .build().toUri();
         return Arrays.asList(Objects.requireNonNull(restTemplate.getForObject(uri, UserDto[].class)));
+    }
+
+    @Override
+    public Collection<WorkerDto> getCouriersFromWarehouse(WarehouseType type, long id) {
+        var uri = UriComponentsBuilder.fromUriString(restServiceUrls.getPakaFlowApiUrl())
+                .path("/warehouse/")
+                .pathSegment(type == WarehouseType.LOCAL ? "local" : "global")
+                .path("/{id}/couriers")
+                .build(id);
+        return Arrays.asList(Objects.requireNonNull(restTemplate.getForObject(uri, WorkerDto[].class)));
     }
 }

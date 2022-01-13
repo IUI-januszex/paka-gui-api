@@ -1,9 +1,7 @@
 package pl.com.januszex.paka.gui.user.api.dao;
 
-import pl.com.januszex.paka.gui.user.api.dto.ActivationDto;
-import pl.com.januszex.paka.gui.user.api.dto.CourierParcelsDto;
-import pl.com.januszex.paka.gui.user.api.dto.UserDto;
-import pl.com.januszex.paka.gui.user.api.dto.UserParcels;
+import pl.com.januszex.paka.gui.user.api.dto.*;
+import pl.com.januszex.paka.gui.warehouse.api.dto.WarehouseType;
 
 import java.util.Collection;
 
@@ -18,4 +16,6 @@ public interface UserDao {
     void changeActiveStatus(String id, ActivationDto activation);
 
     Collection<UserDto> getAllUsers();
+
+    Collection<WorkerDto> getCouriersFromWarehouse(WarehouseType type, long id);
 }
