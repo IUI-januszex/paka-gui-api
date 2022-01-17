@@ -32,9 +32,9 @@ class UserRestDao implements UserDao {
     }
 
     @Override
-    public CourierParcelsDto getCourierParcels() {
+    public CourierParcelsDto getCourierParcels(String id) {
         URI uri = UriComponentsBuilder.fromUriString(restServiceUrls.getPakaFlowApiUrl()).path("/courier/{id}/parcels")
-                .build(currentUserService.getId());
+                .build(id);
         return restTemplate.getForObject(uri, CourierParcelsDto.class);
     }
 

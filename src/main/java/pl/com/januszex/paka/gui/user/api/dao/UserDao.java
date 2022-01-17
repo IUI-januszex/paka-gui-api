@@ -9,7 +9,7 @@ public interface UserDao {
 
     UserDto me();
 
-    CourierParcelsDto getCourierParcels();
+    CourierParcelsDto getCourierParcels(String id);
 
     UserParcels getUserParcels();
 
