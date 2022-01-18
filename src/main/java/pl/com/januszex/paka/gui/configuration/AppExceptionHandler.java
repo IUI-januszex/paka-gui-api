@@ -11,6 +11,7 @@ import org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolv
 import pl.com.januszex.paka.gui.global.exception.ErrorResponse;
 import pl.com.januszex.paka.gui.global.exception.RestTemplateException;
 
+import java.net.ConnectException;
 import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 
@@ -22,6 +23,12 @@ public class AppExceptionHandler extends DefaultHandlerExceptionResolver {
     public ResponseEntity<Object> businessLogicExceptionHandler(RestTemplateException ex) {
         log.debug("Request to {} with response {}", ex.getUrl(), ex.getCode());
         return new ResponseEntity<>(ex.getPayload(), ex.getCode());
+    }
+
+    @ExceptionHandler(ConnectException.class)
+    public ResponseEntity<ErrorResponse> businessLogicExceptionHandler(ConnectException ex) {
+        return ResponseEntity.internalServerError().body(new ErrorResponse(LocalDateTime.now().toString(),
+                "Communication error, please contact the administrator"));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
