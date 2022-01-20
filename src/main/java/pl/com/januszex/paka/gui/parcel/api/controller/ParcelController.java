@@ -41,7 +41,7 @@ public class ParcelController {
         return ResponseEntity.ok(parcelDao.getDetailedById(id));
     }
 
-    @GetMapping(path = "/{id}/delivery-attempts")
+    @GetMapping(path = "/{id}/delivery-attempt")
     public ResponseEntity<Collection<DeliveryAttemptDto>> getDeliveryAttempts(@PathVariable("id") long id) {
         return ResponseEntity.ok(parcelDao.getDeliveryAttempts(id));
     }
