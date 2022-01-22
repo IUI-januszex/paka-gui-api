@@ -61,7 +61,7 @@ class UserRestDao implements UserDao {
 
     @Override
     public Collection<WorkerDto> getCouriersFromWarehouse(WarehouseType type, long id) {
-        var uri = UriComponentsBuilder.fromUriString(restServiceUrls.getPakaFlowApiUrl())
+        var uri = UriComponentsBuilder.fromUriString(restServiceUrls.getPakaUsersApiUrl())
                 .path("/warehouse/")
                 .pathSegment(type == WarehouseType.LOCAL ? "local" : "global")
                 .path("/{id}/couriers")

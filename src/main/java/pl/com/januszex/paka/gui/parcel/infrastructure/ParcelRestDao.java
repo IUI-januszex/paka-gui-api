@@ -54,7 +54,7 @@ class ParcelRestDao implements ParcelDao {
 
     @Override
     public Collection<DeliveryAttemptDto> getDeliveryAttempts(long id) {
-        URI uri = getParcelPath().path("/delivery-attempts").build(id);
+        URI uri = getParcelPath().path("/delivery-attempt").build(id);
         return Arrays.asList(Objects.requireNonNull(restTemplate.getForObject(uri, DeliveryAttemptDto[].class)));
     }
 
@@ -82,7 +82,7 @@ class ParcelRestDao implements ParcelDao {
 
     @Override
     public void deliverToClient(long id) {
-        performPostOperation(id, null, "/return-to-client");
+        performPostOperation(id, null, "/deliver-to-client");
     }
 
     @Override

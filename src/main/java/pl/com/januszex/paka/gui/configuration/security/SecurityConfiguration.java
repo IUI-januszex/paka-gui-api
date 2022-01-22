@@ -71,13 +71,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         var filter = new CookieAuthFilter();
         filter.setAuthenticationManager(authenticationManagerBean());
+        CookieCsrfTokenRepository csrfTokenRepository = CookieCsrfTokenRepository.withHttpOnlyFalse();
+        csrfTokenRepository.setCookiePath("/");
         http.cors()
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .csrf().disable()//TODO .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                //.and()
+                .csrf().csrfTokenRepository(csrfTokenRepository)
+                .and()
                 .authorizeRequests()
                 .antMatchers("/swagger-ui.html",
                         "/h2-console/**",
